@@ -1,0 +1,105 @@
+﻿@model M6Evidence.ViewModels.StudentViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-5  shadow-lg">
+                <div class="card-header d-flex">
+                    <div class="mr-auto bd-highlight"> <strong>Create Student</strong></div>
+                    <div class=" bd-highlight"> <a asp-controller="Student" asp-action="Index" class="btn btn-info btn-sm rounded-0"><i class="fa fa-users"></i>  All Student</a></div>
+
+
+
+                </div>
+                <div id="placeholder"></div>
+                <div class="card-body">
+                    <div class="register-form-container">
+
+                        <form method="post" asp-controller="Student" asp-action="Create" enctype="multipart/form-data">
+                            <div class="form-group row mb-1">
+                                <label asp-for="StudentName" class="col-form-label  col-4"></label>
+                                <div class="col-8">
+                                    <input type="text" asp-for="StudentName" class="form-control " />
+                                    <span asp-validation-for="StudentName" class="text-danger" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-1">
+                                <label asp-for="EnrollmentDate" class="col-form-label  col-4"></label>
+                                <div class="col-8">
+                                    <input type="text" asp-for="EnrollmentDate" class="form-control " />
+                                    <span asp-validation-for="EnrollmentDate" class="text-danger" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-1">
+                                <label asp-for="CourseId" class="col-form-label  col-4"></label>
+                                <div class="col-8">
+
+                                    <select asp-for="CourseId" class="form-control" asp-items="@(new SelectList(ViewBag.Courses, "CourseId", "CourseTitle"))" required>
+                                        <option selected="selected" value="">Select Course</option>
+                                    </select>
+
+                                    <span asp-validation-for="CourseId" class="text-danger" />
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group row mb-1">
+                                <label asp-for="Picture" class="col-form-label  col-4"></label>
+                                <div class="col-8">
+                                    <input asp-for="Picture" class="form-control">
+                                    <span asp-validation-for="Picture" class="text-danger" />
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex justify-content-end">
+
+
+                                <button type="submit" class="btn btn-dark  btn-sm rounded-0">Save</button>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+@section styles{
+    <link rel="stylesheet" href="~/libs/bootstrap/css/bootstrap-datepicker.css" />
+}
+
+@section scripts {
+
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/validate/jquery.validate.js"></script>
+    <script src="~/libs/validate/jquery.validate.unobtrusive.js"></script>
+    <script src="~/libs/bootstrap/js/js/bootstrap-datepicker.js"></script>
+    <script>
+        $("#EnrollmentDate").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+    </script>
+
+}
+
+
+

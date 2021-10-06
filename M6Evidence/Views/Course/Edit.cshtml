@@ -1,0 +1,76 @@
+﻿@model Course
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <div class="card mt-5 shadow-lg">
+                <div class="card-header d-flex">
+                    <div class="mr-auto bd-highlight"> <strong>Create Course</strong></div>
+                    <div class=" bd-highlight"> <a asp-controller="Course" asp-action="Index" class="btn btn-info btn-sm rounded-0"><i class="fa fa-book"></i>  All Courses</a></div>
+
+
+
+                </div>
+
+                <div class="card-body">
+                    <div class="register-form-container">
+
+                        <div id="placeholder"></div>
+                        <form method="post" asp-action="Edit" asp-controller="Course" asp-route-CourseId="@Model.CourseId" id="CoursesId"
+                              data-ajax="true"
+                              data-ajax-method="POST"
+                              data-ajax-mode="replace"
+                              data-ajax-update="#placeholder"
+                              data-ajax-success="onSuccess">
+
+
+
+                            <div class="form-group row mb-1">
+                                <label asp-for="CourseTitle" class="col-form-label  col-4"></label>
+                                <div class="col-8">
+                                    <input type="text" asp-for="CourseTitle" class="form-control " />
+                                    <span asp-validation-for="CourseTitle" class="text-danger" />
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex justify-content-end">
+
+
+                                <button type="submit" class="btn btn-dark  btn-sm rounded-0">Save</button>
+
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@section scripts {
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script src="~/libs/validate/jquery.validate.js"></script>
+    <script src="~/libs/validate/jquery.validate.unobtrusive.js"></script>
+    <script src="~/libs/jquery/jquery.unobtrusive-ajax.js"></script>
+
+    <script>
+        function onSuccess() {
+            $("#CoursesId").trigger('reset');
+        }
+    </script>
+
+}
+
+

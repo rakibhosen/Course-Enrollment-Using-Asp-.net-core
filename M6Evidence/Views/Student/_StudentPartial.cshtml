@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Student>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
+        <tr>
+            <th>Picture</th>
+            <th>Student Name</th>
+            <th>Enrollment Date</th>
+            <th>Course Name</th>
+            <th>Actionss</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var b in Model)
+        {
+            <tr>
+                <td><img asp-append-version="true" src="/Uploads/@b.Picture" style="width:50px;height:50px;" class="img-thumbnail" /></td>
+                <td>@b.StudentName </td>
+                <td>@b.EnrollmentDate </td>
+                <th>@b.Course.CourseTitle</th>
+
+                <td style="width:150px;" class="text-center">
+
+
+                    <a asp-action="Edit" asp-controller="Student" asp-route-Id="@b.StudentId" class="btn btn-primary btn-sm rounded-0"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger btn-sm rounded-0 " data-toggle="modal" data-target="#deleteModal-@b.StudentId"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+
+            <!-- Delete  Modal -->
+            <div class="modal" id="deleteModal-@b.StudentId">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <strong>Are you sure want to delete?</strong>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body d-flex justify-content-center">
+
+
+                            <form action="Student/Delete/@b.StudentId" method="post">
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    <input type="submit" value="Delete" class="btn btn-sm btn-danger rounded-0" />
+
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        }
+    </tbody>
+</table>
